@@ -3,7 +3,7 @@
   session_start();
   $IdAuditoria = $_SESSION['id'];
   /**/
-  $res = $conexion->query("select * from Planes p join auditor a on a.idauditor = p.idauditor where IdAuditoria = $IdAuditoria");
+  $res = $conexion->query("select * from Planes p join auditor a on a.idauditor = p.idauditor where IdAuditoria = $IdAuditoria order by IdPlan desc");
   $Obj = $res->fetchAll(PDO::FETCH_OBJ);
   //$Obj = $Obj[0];
  ?>
@@ -28,7 +28,7 @@
           ?>
             <tr>
               <td><?php echo $o->Descripcion ?></td>
-              <td><?php echo $o->Horas ?></td>
+              <td><?php echo $o->Horas ?> días</td>
               <td><?php echo $o->FInicio ?></td>
               <td><?php echo $o->FTermino ?></td>
               <td><?php echo $o->Apellidos.' '.$o->Nombres ?></td>

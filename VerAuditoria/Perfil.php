@@ -41,13 +41,10 @@
                     <?php 
                         $listaperfil = split(';', $o->Perfil);
                         foreach ($listaperfil as $item) {
-                          echo "<li>$item</li>";
+                          if (strlen($item) > 3)
+                            echo "<li>$item</li>";
                         }
                      ?>
-                    <li>Conocimiento en elaboración y ejecución de proyectos.</li>
-                    <li>Conocimiento en ejecución de inventariado físico.</li>
-                    <li>Proactivo.</li>
-                    <li>Conocimiento en funcionamiento de aplicaciones ofimáticas.</li>
                   </ul>
                 </div>
               </div>

@@ -38,7 +38,7 @@
                     <!--Quotation-->
                     <ul class="text-left">
                       <li><b>Carrera: </b>Ing.Sistemas</li>
-                      <li><b>Celular: </b>981559813</li>
+                      <li><b>Celular: </b><?php echo $o->Celular; ?></li>
                     </ul>
                   </div>
                 </div>

@@ -25,7 +25,8 @@ CREATE TABLE Auditor
 	IdAuditor            int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	Apellidos            varchar(50) NULL,
 	Nombres              varchar(50) NULL,
-	Perfil               varchar(30) NULL
+	Perfil               text NULL,
+	Celular              varchar(25) null
 );
 
 
@@ -43,8 +44,8 @@ CREATE TABLE Auditoria
 
 CREATE TABLE DetalleArchivos
 (
-	IdAuditoria          int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	IdDetalle            int NOT NULL,
+	IdAuditoria          int NOT NULL,
+	IdDetalle            int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	Nombre               varchar(200) NULL,
 	Ruta                 varchar(300) NULL
 );
@@ -416,11 +417,11 @@ CREATE TABLE Organigrama
 
 use SistemaAuditoria;
 
-INSERT INTO `auditor` (`IdAuditor`, `Apellidos`, `Nombres`, `Perfil`) VALUES
-(1, 'Navez Aroca', 'Jairo', 'Conocimiento del uso de la herramienta XPCSPYP.exe;Conocimiento en elaboración de inventarios con la herramienta OCS Inventory.;Proactivo.'),
-(2, 'Briceño Montaño', 'Javier', 'Conocimiento en elaboración y ejecución de proyectos.;Conocimiento en ejecución de inventariado físico.;Proactivo.;Conocimiento en funcionamiento de aplicaciones ofimáticas.'),
-(3, 'Olivares Ruiz', 'Cintia', 'Conocimiento de normas y leyes para el licenciamiento de software;Conocimiento en reglamento y funciones de entidades públicas.;Proactivo.'),
-(4, 'Argomedo de la Cruz', 'Jhon', 'Conocimiento de funcionalidades de aplicaciones ofimáticas.;Conocimiento en elaboración de informes y cronogramas de trabajo.;Proactivo.;');
+INSERT INTO `auditor` (`IdAuditor`, `Apellidos`, `Nombres`, `Perfil`,`Celular`) VALUES
+(1, 'Navez Aroca', 'Jairo', 'Conocimiento del uso de la herramienta XPCSPYP.exe;Conocimiento en elaboración de inventarios con la herramienta OCS Inventory.;Proactivo.','956504624'),
+(2, 'Briceño Montaño', 'Javier', 'Conocimiento en elaboración y ejecución de proyectos.;Conocimiento en ejecución de inventariado físico.;Proactivo.;Conocimiento en funcionamiento de aplicaciones ofimáticas.','981559813'),
+(3, 'Olivares Ruiz', 'Cintia', 'Conocimiento de normas y leyes para el licenciamiento de software;Conocimiento en reglamento y funciones de entidades públicas.;Proactivo.','942419208'),
+(4, 'Argomedo de la Cruz', 'Jhon', 'Conocimiento de funcionalidades de aplicaciones ofimáticas.;Conocimiento en elaboración de informes y cronogramas de trabajo.;Proactivo.;','942419208');
 
 
 insert into Rubro(Descripcion) values
@@ -551,3 +552,27 @@ INSERT INTO `detalleauditores` (`IdDetalle`, `IdAuditor`, `IdAuditoria`, `IdRol`
 (2, 2, 1, 7),
 (3, 3, 1, 9),
 (4, 4, 1, 8);
+
+
+INSERT INTO `planes` (`IdPlan`, `Descripcion`, `FInicio`, `FTermino`, `Horas`, `IdAuditoria`, `IdAuditor`) VALUES
+(1, 'Elaborar documento de los instrumentos de gestion', '2019-05-05', '2019-05-07', 2, 1, 1);
+INSERT INTO `planes` (`IdPlan`, `Descripcion`, `FInicio`, `FTermino`, `Horas`, `IdAuditoria`, `IdAuditor`) VALUES
+(2, 'Verificar la existencia de los instrumentos de gestión', '2019-05-08', '2019-07-09', 2, 1, 2);
+INSERT INTO `planes` (`IdPlan`, `Descripcion`, `FInicio`, `FTermino`, `Horas`, `IdAuditoria`, `IdAuditor`) VALUES
+(3, 'Elaborar y aplicar el checklist al personal', '2019-05-10', '2019-07-13', 2, 1, 2);
+INSERT INTO `planes` (`IdPlan`, `Descripcion`, `FInicio`, `FTermino`, `Horas`, `IdAuditoria`, `IdAuditor`) VALUES
+(4, 'Analizar y verificar el cumplimiento de los instrumentos de gestión', '2019-05-14', '2019-07-15', 2, 1, 3);
+INSERT INTO `planes` (`IdPlan`, `Descripcion`, `FInicio`, `FTermino`, `Horas`, `IdAuditoria`, `IdAuditor`) VALUES
+(5, 'Elaborar un documento de peticiòn para que autoricen la evaluaciòn del software', '2019-05-16', '2019-07-17', 2, 1, 1);
+INSERT INTO `planes` (`IdPlan`, `Descripcion`, `FInicio`, `FTermino`, `Horas`, `IdAuditoria`, `IdAuditor`) VALUES
+(6, 'verificar si el uso del software que usa la empresa es legitimo ', '2019-05-20', '2019-07-21', 2, 1, 4);
+
+
+INSERT INTO `detallearchivos` (`IdAuditoria`, `IdDetalle`, `Nombre`, `Ruta`) VALUES
+(1, 1, 'Informe de verificación de los instrumentos de Gestión (MOF)', NULL),
+(1, 2, 'Informe de verificación de los instrumentos de Gestión (ROF)', NULL),
+(1, 3, 'Informe de Evaluación de las aplicaciones ofimáticas(Documentación, Estructura y funcionalidades).', NULL),
+(1, 4, 'Informe de evaluación del Inventario de Licencias de Software.', NULL),
+(1, 5, 'Informe de evaluación del Inventario del equipo físico.', NULL),
+(1, 6, 'Informe Corto de Auditoria (Borrador).', NULL),
+(1, 7, 'Informe Detallado de Auditoria.', NULL);

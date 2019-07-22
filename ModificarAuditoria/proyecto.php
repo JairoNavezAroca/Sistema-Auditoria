@@ -50,7 +50,7 @@
              <div class="row">
                <div class="col-md-3">
                    <div class="form-group">
-                    <label for="Probabilidad">Cantidad de Horas</label>
+                    <label for="Probabilidad">Cantidad de Días</label>
                     <input type="number" id="Probabilidad" class="form-control" required="" name="Proyecto_HorasCantidad" id="Proyecto_HorasCantidad" form="formularioProyecto">
                   </div>
                </div>
