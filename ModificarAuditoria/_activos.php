@@ -12,4 +12,7 @@
 	$sql = 'insert into Activos(IdAuditoria, Nombre, Descripcion, Importancia) values';
 	$sql = "$sql ($id, '$Activo_Nombre', '$Activo_Descripcion', '$Activo_Importancia')";
 	$conexion->query($sql);
+
+	$id = $_SESSION['id'];
+	header("Location:main.php?id=$id");
  ?>

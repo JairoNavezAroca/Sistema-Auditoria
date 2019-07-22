@@ -20,8 +20,8 @@
          <div class="row justify-content-around">
            <div class="col-md-5">
              <div class="form-group">
-                    <label for="Entregable">Descripción de Entregable</label>
-                    <textarea class="form-control" id="Entregable" rows="2"></textarea>
+                    <label for="nombreEntregable">Descripción de Entregable</label>
+                    <textarea class="form-control" form="formularioEntregables" id="nombreEntregable" name="nombreEntregable" rows="2"></textarea>
               </div>
            </div>
 
@@ -31,7 +31,7 @@
                           <div class="d-flex justify-content-center">
                             <div class="btn btn-mdb-color btn-rounded float-left">
                               <span>Cargar Documento</span>
-                              <input type="file" id="Doc">
+                              <input type="file" id="Doc" form="formularioEntregables" id="archivoEntregable" name="archivoEntregable">
                             </div>
                           </div>
                         </div>
@@ -44,7 +44,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary btn-sm">Guardar Cambios</button>
+        <form action="_entregables.php" id="formularioEntregables" method="POST" novalidate>
+          <input type="submit" name="" value="Guardar Cambios" class="btn btn-primary btn-sm">
+        </form>
       </div>
     </div>
   </div>

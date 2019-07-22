@@ -18,4 +18,6 @@
 		$conexion->query($sql);
 	}
 
+	$id = $_SESSION['id'];
+	header("Location:main.php?id=$id");
  ?>

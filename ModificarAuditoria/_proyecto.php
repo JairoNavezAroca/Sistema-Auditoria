@@ -18,4 +18,7 @@
 	$sql = "$sql ($id, '$Proyecto_DescripcionAct', '$FInicio', '$FFinal', '$Proyecto_HorasCantidad', $Proyecto_Responsable)";
 	echo $sql;
 	$conexion->query($sql);
+
+	$id = $_SESSION['id'];
+	header("Location:main.php?id=$id");
  ?>

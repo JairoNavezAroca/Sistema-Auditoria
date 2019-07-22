@@ -10,4 +10,7 @@
 	$sql = 'insert into entrevistas(IdAuditoria, Nombres, Cargo) values';
 	$sql = "$sql ($id, '$Nombres', '$Cargo')";
 	$conexion->query($sql);
+
+	$id = $_SESSION['id'];
+	header("Location:main.php?id=$id");
  ?>

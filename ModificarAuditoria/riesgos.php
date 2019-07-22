@@ -2,7 +2,7 @@
   LaFuncionMagica();
   function LaFuncionMagica(){
     var pagina = "Partes/Riesgos.php";
-    idControlador = "#Riesgos_Riesgos";
+    idControladorx = "#Riesgos_Riesgos";
     $.ajax({
       type: "POST",
       url: pagina,
@@ -13,8 +13,8 @@
         alert("Error, Intente nuevamente");
       },
       success: function(data){
-        $(idControlador).empty();
-        $(idControlador).append(data);
+        $(idControladorx).empty();
+        $(idControladorx).append(data);
       }
     });
   }
