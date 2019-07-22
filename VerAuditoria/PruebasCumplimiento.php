@@ -33,6 +33,7 @@
 
 
 
+<!--
 
 <div class="row justify-content-around">
 	<div class="col-md-7"><h4>Documentación de Inventarios</h4></div>
@@ -46,3 +47,4 @@
 	<div class="col-md-4"><a class="btn btn-blue btn-block animated fadeInRight" data-toggle="modal" data-target="#DocLic"><i class="fas fa-eye fa-2x "></i><div>Mostrar</div></a></div>
 </div>
 
+-->

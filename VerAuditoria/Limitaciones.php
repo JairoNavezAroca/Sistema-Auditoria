@@ -1,10 +1,22 @@
+<?php 
+  include("..//conexion2.php");
+  session_start();
+  $IdAuditoria = $_SESSION['id'];
+  /**/
+  $res = $conexion->query("select Limitaciones from planificacion where IdAuditoria = $IdAuditoria");
+  $Obj = $res->fetchAll(PDO::FETCH_OBJ);
+  $Obj = $Obj[0];
+ ?>
+
 <h1 class="text-center card-header">Limitaciones</h1>
 <br>
 
-
-
 <h3 class="mt-2 ml-3">Entre los distintos factores que limitan el desarrollo de nuestro proyecto podemos mencionar:</h3>
 	<ol>
-		<li>Existencia de políticas de seguridad en la institución que limitan el libre tránsito del equipo auditor por las oficinas del departamento de Bienestar estudiantil.</li>
-		<li>La ubicación de la institución auditada se encuentra a 3 horas de viaje desde la locación del equipo auditor.</li>
+		<?php 
+			$vector = explode(chr(13),$Obj->Limitaciones);
+			foreach ($vector as $v) {
+				echo '<li>'.$v.'</li>';
+			}
+		 ?>
 	</ol>
