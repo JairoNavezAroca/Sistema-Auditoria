@@ -121,15 +121,6 @@ CREATE TABLE Entrevistas
 
 
 
-CREATE TABLE Entregables
-(
-	IdEntregable         int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	Descripcion          text NULL,
-	Documento            text NULL,
-	IdAuditoria          int NOT NULL
-);
-
-
 CREATE TABLE MarcoInstitucional
 (
 	IdInstitucional      int NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -187,12 +178,12 @@ CREATE TABLE Planificacion
 (
 	IdAuditoria          int NOT NULL,
 	IdPlanificacion      int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	ObjGeneral           text NULL,
-	ObjEspecifico        text NULL,
-	Alcance              text NULL,
-	Realizar             text NULL,
-	NoRealizar           text NULL,
-	Limitaciones         text NULL
+	ObjGeneral           VARCHAR(100) NULL,
+	ObjEspecifico        VARCHAR(300) NULL,
+	Alcance              VARCHAR(200) NULL,
+	Realizar             VARCHAR(100) NULL,
+	NoRealizar           VARCHAR(100) NULL,
+	Limitaciones         VARCHAR(100) NULL
 );
 
 
@@ -224,6 +215,71 @@ CREATE TABLE Rubro
 	Descripcion          varchar(20) NULL
 );
 
+
+
+
+CREATE TABLE PruebaCumplimiento
+(
+	IdPrueba 			int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	IdAuditoria			int NOT NULL,
+	FechaRegistro		datetime  default NOW(),
+	Nombre 				text NOT NULL,
+	Normas				varchar(300),
+	FOREIGN KEY (IdAuditoria) REFERENCES Auditoria(IdAuditoria)
+);
+
+
+CREATE TABLE DetallePruebaCumplimiento
+(
+	IdDetalle 		int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	IdPrueba 		int NOT NULL,
+	Pregunta		varchar(100),
+	Norma           varchar(100),
+	Respuesta		boolean,
+	FOREIGN KEY (IdPrueba) REFERENCES PruebaCumplimiento(IdPrueba)
+);
+
+CREATE TABLE PruebaCumplimientoRealizada
+(
+	IdPruebaRealizada int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	Auditado	varchar(100),
+	FechaEjecucion	datetime,
+	institucion 	varchar(100),
+	IdPrueba 		int,
+	FOREIGN KEY (IdPrueba) REFERENCES PruebaCumplimiento(IdPrueba)
+);
+
+CREATE TABLE DetallePruebaCumplimientoRealizada
+(
+	IdDetallePR 	int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	IdPruebaRealizada int NOT NULL,
+	IdPregunta		int,
+	Respuesta		boolean,
+	Observacion 	text,
+	FOREIGN KEY (IdPruebaRealizada) REFERENCES PruebaCumplimientoRealizada(IdPruebaRealizada),
+	FOREIGN KEY (IdPregunta) REFERENCES DetallePruebaCumplimiento(IdDetalle)
+);
+
+CREATE TABLE PruebaSustantiva
+(
+	IdPrueba 		int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	IdAuditor 		int NOT NULL,
+	IdPregunta 		int NOT NULL,
+	Nombre 			varchar(50),
+	Resultado		boolean,
+	FOREIGN KEY (IdAuditor) REFERENCES Auditor(IdAuditor),
+	FOREIGN KEY (IdPregunta) REFERENCES DetallePruebaCumplimiento(IdDetalle)
+);
+
+CREATE TABLE DetallePruebaSustantiva
+(
+	IdDetalle 				int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	IdPrueba				int,
+	Descripcion 			varchar(50),
+	Resultado				boolean,
+	FOREIGN KEY (IdPrueba) REFERENCES PruebaSustantiva(IdPrueba)
+
+);
 
 
 
@@ -316,11 +372,6 @@ ADD FOREIGN KEY R_22 (IdAuditoria) REFERENCES Auditoria (IdAuditoria);
 
 
 
-ALTER TABLE Entregables
-ADD FOREIGN KEY R_25 (IdAuditoria) REFERENCES Auditoria (IdAuditoria);
-
-
-
 ALTER TABLE Planes
 ADD FOREIGN KEY R_23 (IdAuditoria) REFERENCES Auditoria (IdAuditoria);
 
@@ -343,18 +394,25 @@ ADD FOREIGN KEY R_19 (IdActivo) REFERENCES Activos (IdActivo);
 
 
 
+CREATE TABLE Estrategias
+(
+	IdEmpresa int,
+	estrategia text,
+	FOREIGN KEY (IdEmpresa) REFERENCES Empresa(IdEmpresa)
+);
 
-
-
-
-
-
+CREATE TABLE Organigrama
+(
+	IdEmpresa int,
+	link text,
+	descripcion text,
+	FOREIGN KEY (IdEmpresa) REFERENCES Empresa(IdEmpresa)
+);
 
 
 
 
 use SistemaAuditoria;
-
 insert into Rubro(Descripcion) values
 	('Educacion'),
 	('Informática'),
@@ -383,27 +441,21 @@ insert into Rol(Descripcion) values
 	('Especialista en Ofimática');
 
 
-insert into MarcoInternacional(Codigo, Detalle) values
-	('APO13.02','Definir y gestionar un plan de tratamiento del riesgo de la seguridad de la información.'),
-	('EDM04.01','Examinar y evaluar continuamente la necesidad actual y futura de los recursos relacionados con TI, las opciones para la asignación de recursos (incluyendo estrategias de aprovisionamiento) y los principios de asignación y gestión para cumplir de manera óptima con las necesidades de la empresa.'),
-	('DSS04','Gestionar la continuidad'),
-	('IEEE 1062:1998','En este estándar se describe una práctica que puede ser utilizada para la adquisición de cualquier producto de software, para cualquier tipo de plataforma computacional, independiente de su tamaño y complejidad.'),
-	('Modelo CMMI-ACQ','El Modelo CMMI – ACQ está diseñado especialmente para las organizaciones que adquieren software y servicios correlacionados. Proporciona una orientación para gestionar los proyectos relacionados con la adquisición de productos y servicios.');
 
+insert into Empresa(IdRubro,Nombre,Mision,Vision,Estrategias,Ubicacion) 
+	values (1,'Colegio de Alto Rendimiento - La Libertad','Ser una institución educativa con estándares internacionales de acreditación que consoliden el modelo educativo propio de la red de Colegios de Alto Rendimiento, sirviendo de referente de calidad académica, organizacional y de gestión en la región, que contribuya a mejorar la educación pública como base del desarrollo nacional y mundial.',
+			'Somos una institución educativa pública acreditada, parte de la Red de Colegios de Alto Rendimiento, que sobre la base del Programa Diploma del Bachillerato Internacional, fortalece las competencias personales, académicas y socioemocionales de estudiantes de alto desempeño, con miras a forjar ciudadanos íntegros y líderes comprometidos con el desarrollo del país y del mundo.',
+			'','La institución se encuentra a unos 15 minutos de viaje desde la ciudad de Virú, sus alrededores son poco poblados y está parcialmente aislado de las actividades de la ciudad. La ubicación de esta institución favorece a sus objetivos institucionales, ya que al funcionar como internado, es conveniente alejar a los estudiantes de posibles distracciones y peligros existentes en la ciudad.');
 
-insert into MarcoNacional(Codigo, Detalle) values
-	('NTP-ISO/IEC 17799','Tecnología de Información.Código de Buenas prácticas para la gestión de Seguridad.'),
-	('DECRETO SUPREMO Nº 013-2003-PCM','Dictan medidas para garantizar la legalidad de la adquisición de programas de software en entidades y dependencias del Sector Público. Asimismo, dicta directrices para el correcto inventariado de software.'),
-	('DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269','Ley de firmas y certificados digitales. Nos permitirá evaluar que las licencias de las aplicaciones adquiridas sean legales.'),
-	('Resolución Nª 039-98/SBN','Ofrece las directrices para una correcta planeación y ejecución de inventariado de muebles físicos que posee una entidad del estado peruano.'),
-	('Resolución Nª 158-97','Para poder identificar los tipos de bienes que pueden ser inventariados, así como las características que deben de tener.');
+INSERT INTO Estrategias(IdEmpresa,estrategia) VALUES
+(1,'Educar a los alumnos bajo una guía basada en los diversos estándares internacionales con la finalidad de formar alumnos con competencias académicas y socioemocionales, y profesionalmente preparados para el futuro del mañana.'),
+(1,'Ofrecer un servicio responsable y oportuno.'),
+(1,'Ser un equipo integrado, donde se desarrolle un trabajo eficiente entre los miembros de la institución.');
 
-
-
-
-insert into Empresa(IdRubro,Nombre,Mision,Vision,Estrategias,Ubicacion) values (1,'Colegio de Alto Rendimiento - La Libertad','Ser una institución educativa con estándares internacionales de acreditación que consoliden el modelo educativo propio de la red de Colegios de Alto Rendimiento, sirviendo de referente de calidad académica, organizacional y de gestión en la región, que contribuya a mejorar la educación pública como base del desarrollo nacional y mundial.','Somos una institución educativa pública acreditada, parte de la Red de Colegios de Alto Rendimiento, que sobre la base del Programa Diploma del Bachillerato Internacional, fortalece las competencias personales, académicas y socioemocionales de estudiantes de alto desempeño, con miras a forjar ciudadanos íntegros y líderes comprometidos con el desarrollo del país y del mundo.','* Educar a los alumnos bajo una guía basada en los diversos estándares internacionales con la finalidad de formar alumnos con competencias académicas y socioemocionales, y profesionalmente preparados para el futuro del mañana.
-*Ofrecer un servicio responsable y oportuno.
-*Ser un equipo integrado, donde se desarrolle un trabajo eficiente entre los miembros de la institución.','La institución se encuentra a unos 15 minutos de viaje desde la ciudad de Virú, sus alrededores son poco poblados y está parcialmente aislado de las actividades de la ciudad. La ubicación de esta institución favorece a sus objetivos institucionales, ya que al funcionar como internado, es conveniente alejar a los estudiantes de posibles distracciones y peligros existentes en la ciudad.');
+INSERT INTO Organigrama(IdEmpresa,link,descripcion) VALUES
+	(1,'','En la estructura departamental de la institución no existe un área específica que administre los sistemas de información y/o tecnologías de la información. Por tanto cada departamento es independiente en  administrar y dar soporte a sus aplicaciones ofimáticas, asimismo controlar los recursos de hardware que utilizan. 
+La inexistencia de un departamento de TI no favorece el cumplimiento de los objetivos institucionales.
+');
 
 
 insert into Auditoria(IdEmpresa,IdAuditor,Titulo,Motivos) values (1,1,'Auditoria ofimática al departamento de Bienestar Estudiantil del Colegio de Alto Rendimiento de la Libertad','Geográficamente, el Colegio de Alto Rendimiento de La Libertad, se encuentra ubicado en el campamento San José, provincia de Virú, departamento de La Libertad
@@ -415,10 +467,27 @@ El ambiente en donde funciona el área de Bienestar estudiantil, así como sus d
 
 
 
+insert into MarcoInternacional(Codigo, Detalle) values
+	('APO13.02','Definir y gestionar un plan de tratamiento del riesgo de la seguridad de la información.'),
+	('EDM04.01','Examinar y evaluar continuamente la necesidad actual y futura de los recursos relacionados con TI, las opciones para la asignación de recursos (incluyendo estrategias de aprovisionamiento) y los principios de asignación y gestión para cumplir de manera óptima con las necesidades de la empresa.'),
+	('DSS04','Gestionar la continuidad'),
+	('IEEE 1062:1998','En este estándar se describe una práctica que puede ser utilizada para la adquisición de cualquier producto de software, para cualquier tipo de plataforma computacional, independiente de su tamaño y complejidad.'),
+	('Modelo CMMI-ACQ','El Modelo CMMI – ACQ está diseñado especialmente para las organizaciones que adquieren software y servicios correlacionados. Proporciona una orientación para gestionar los proyectos relacionados con la adquisición de productos y servicios.');
+
+
+
+
 insert into DetalleInternacional(IdAuditoria,IdInternacional) values
 	(1,2),
 	(1,3),
 	(1,4);
+
+insert into MarcoNacional(Codigo, Detalle) values
+	('NTP-ISO/IEC 17799','Tecnología de Información.Código de Buenas prácticas para la gestión de Seguridad.'),
+	('DECRETO SUPREMO Nº 013-2003-PCM','Dictan medidas para garantizar la legalidad de la adquisición de programas de software en entidades y dependencias del Sector Público. Asimismo, dicta directrices para el correcto inventariado de software.'),
+	('DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269','Ley de firmas y certificados digitales. Nos permitirá evaluar que las licencias de las aplicaciones adquiridas sean legales.'),
+	('Resolución Nª 039-98/SBN','Ofrece las directrices para una correcta planeación y ejecución de inventariado de muebles físicos que posee una entidad del estado peruano.'),
+	('Resolución Nª 158-97','Para poder identificar los tipos de bienes que pueden ser inventariados, así como las características que deben de tener.');
 
 insert into DetalleNacional(IdAuditoria,IdNacional) values
 	(1,1),
@@ -426,31 +495,4 @@ insert into DetalleNacional(IdAuditoria,IdNacional) values
 	(1,3),
 	(1,4),
 	(1,5);
-
-insert into DetalleObjetos(IdAuditoria,IdObjeto) values
-	(1,1),
-	(1,2);
-
-
-
-insert into DetalleAuditores(IdAuditoria,IdAuditor) values
-	(1,1),
-	(1,2),
-	(1,3),
-	(1,4);
-
-
-insert into Activos(IdAuditoria, Nombre, Descripcion, Importancia) values 
-	(1, 'Computadoras HP – Intel Corei3 – 4 gb RAM', 'Computadoras usadas para la gestión de información del jefe de departamento', 'Importancia'),
-	(1, 'Microsoft Office 2016 Professional', 'Paquete de aplicaciones ofimáticas para la gestión de información.', 'Importancia');
-
-insert into Riesgos(IdAuditoria, IdActivo, Amenazas, Impacto, Probabilidad) values 
-	(1, 1, 'Computadoras usadas para la gestión de información del jefe de departamento.', 'Computadoras usadas para la gestión de información del jefe de departamento.', '50'),
-	(1, 2, 'Paquete de aplicaciones ofimáticas para la gestión de información.', 'Paquete de aplicaciones ofimáticas para la gestión de información.', '50');
-
-
-insert into Planificacion(IdAuditoria, ObjGeneral, ObjEspecifico, Alcance, Realizar, NoRealizar, Limitaciones) values 
-	(1, 'Determinar mediante evidencias si se está ejecutando un correcto control y uso de las aplicaciones ofimáticas dentro del departamento de Bienestar estudiantil del Colegio de Alto Rendimiento de la Libertad (COAR) .', 'a)Comprobar el correcto control de inventario físico. b)Comprobar el correcto control de inventario de licencias de software. c)Verificar la correcta asignación, tanto de las aplicaciones ofimáticas como del hardware, dependiendo del tipo de función que desarrollarán. d)Verificar que el ambiente donde se encuentra los recursos informáticos es el adecuado para su buena utilización y aprovechamiento de estos.', 'I.La presente auditoria solo evaluará los procesos y actividades dentro del departamento de Bienestar Estudiantil del Colegio de Alto Rendimiento de La Libertad. II.Las oficinas del departamento de Bienestar Estudiantil involucradas en la auditoria serán la Oficina de Servicio Social, la Oficina de Convivencia Estudiantil y la oficina de Coordinación Psicopedagógica. III.Se buscará verificar la correcta utilización de las aplicaciones ofimáticas, así como del hardware, tomando en cuenta la función que deben cumplir. IV.Se evaluará la necesidad actual y futura de recursos relacionados con TI basándonos en la norma EDM04.01. V. Se evaluará el correcto proceso de adquisición de software basándonos en las normas IEEE 1062:1998 y la norma CMMI-ACQ. VI. Se valuará la correcta adquisición de licencias de software, así como el correcto inventariado de las mismas, bajo las directrices del decreto supremo Nº 013-2003-PCM y Nº 026-2016-PCM/La ley Nª 27269. VII.Se evaluará el correcto inventariado de equipos físicos bajo el reglamento de la Resolución Nª 039-98/SBN, reglamento Para el Inventario Nacional de Bienes Muebles del Estado. VIII.Se identificarán los equipos de hardware que pueden ser inventariados bajo las reglas de la Resolución Nª 158-97/SBN Catálogo Nacional de Bienes Muebles del Estado.', 'Solo se verificará el cumplimiento de instrumentos de gestión (MOF y ROF) con respecto al departamento de Bienestar Estudiantil, normas y políticas que incidan en el control de inventarios. Se verificará la existencia del Plan de Inventariado de equipos físicos. Se verificará la existencia del Plan de Inventariado de licencias de Software. Se verificará la existencia del Plan para adquisiciones de Software. Se verificará la existencia de un Plan para la asignación de aplicaciones ofimáticas.', 'Solo se verificará el cumplimiento de instrumentos de gestión (MOF y ROF) con respecto al departamento de Bienestar Estudiantil, normas y políticas que incidan en el control de inventarios. No se cambiará o desinstalará las aplicaciones ofimáticas existentes. No se elaborará ningún plan de adquisiciones de software ni otro que no existiera.', 'Entre los distintos factores que limitan el desarrollo de nuestro proyecto podemos mencionar: Existencia de políticas de seguridad en la institución que limitan el libre tránsito del equipo auditor por las oficinas del departamento de Bienestar estudiantil. La ubicación de la institución auditada se encuentra a 3 horas de viaje desde la locación del equipo auditor.');
-
-
 

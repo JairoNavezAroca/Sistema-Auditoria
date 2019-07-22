@@ -7,23 +7,23 @@
 
 
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">Documentación de Inventario</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      
       <div class="modal-body">
         <!-- AQUI ADENTRO ESTÁ TODA LA INFO -->
 
 
 
+        <input type="text" name="" id="parametro" class="d-none">
+        <a id="MostrarPrueba" onclick="MostrarContenidoPrueba()"></a>
 
 
-
-
-
-        <div class="container">
+        <div class="container" id="cajaPreguntas">
+          <div class="modal-header">
+            <h4 class="modal-title w-100" id="myModalLabel">Documentación de Inventario</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+           </div>
 
             <div class="row">
                 <div class=" col-md-5">
@@ -60,7 +60,7 @@
                 <div class=" col-md-4">
                     <div class="container-fluid">
                       <div class="row align-items-center" style="height: 100%;">
-                          <div class="form-check">
+                            <div class="form-check">
                               <input type="checkbox" class="form-check-input" id="1" >
                               <label class="form-check-label" for="1">Si</label>
                             </div>

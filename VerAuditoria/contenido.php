@@ -1,3 +1,73 @@
+
+<?php 
+if(isset($_POST["Auditado"])) 
+{
+
+  $Auditado=$_POST["Auditado"];
+  $Fecha=$_POST["date"];
+  $institucion=$_POST["institucion"];
+  $idPrueba=$_POST["idPrueba"];
+  
+  $respuesta;
+  $idPruebaRealizada;
+  $observacion;
+include("..//conexion.php");
+
+  $sql = "INSERT INTO PruebaCumplimientoRealizada(Auditado,FechaEjecucion,institucion,IdPrueba) VALUES('".$Auditado."','".$Fecha."','".$institucion."','".$idPrueba."')";
+   if($conexion->query($sql)){
+
+       $sql = "SELECT * FROM PruebaCumplimientoRealizada ORDER BY IdPruebaRealizada DESC LIMIT 1";
+       $sql=$conexion->query($sql);
+       $row=mysqli_fetch_array($sql);
+       $idPruebaRealizada=$row[0];
+       
+             $sql1= "SELECT * FROM detallepruebacumplimiento WHERE IdPrueba='".$_POST["idPrueba"]."'";
+             $sql1=$conexion->query($sql1);
+
+
+                 while($row1=mysql_fetch_array($sql1))
+                   {
+                    
+                    ?>  
+                          <script>alert("d2323");</script>
+                    <?php
+
+                   if(isset($_POST['a'.$row1[0]]))$respuesta=1;
+                   else $respuesta=0;
+
+                   if(isset($_POST['o'.$row1[0]]))$observacion=$_POST['o'.$row1[0]];
+                   else $observacion=" ";
+                    
+                     $sql = "INSERT INTO DetallePruebaCumplimientoRealizada(IdPruebaRealizada,IdPregunta,Respuesta,Observacion)VALUES('".$idPruebaRealizada."','".$row1[0]."','".$respuesta."','".$observacion."')";
+                     if($conexion->query($sql))
+                     {
+                        ?>  
+                          <script>alert("dd");</script>
+                        <?php
+                     } 
+                     else
+                     {
+                      ?>  
+                          <script>alert("dd3");</script>
+                        <?php
+                     }
+
+                  }
+
+                  ?>  
+                          <script>alert("nada");</script>
+                        <?php
+
+         
+       }
+
+     }
+
+  ?>
+       
+
+
+
 <?php 
   /*
       $sentencia = $base_de_datos->query("SELECT * FROM productos;");
@@ -175,7 +245,7 @@
 
                        <div role="tab" class="border tab" style="cursor: pointer;" onclick="LaFuncionMagica('Alineamiento.php')">
                           <div style="border-left: solid white 5px; height: 100%;" class="itemL">
-                            <h5 class="pl-4 py-1">Alineamiento de la auditoria a la estrategia del negocio_________</h5>
+                            <h5 class="pl-4 py-1">Alineamiento de la auditoria a la estrategia del negocio</h5>
                           </div>
                       </div>
 
@@ -199,25 +269,25 @@
 
                       <div role="tab" class="border tab" style="cursor: pointer;" onclick="LaFuncionMagica('Perfil.php')">
                           <div style="border-left: solid white 5px; height: 100%;" class="itemL">
-                            <h5 class="pl-4 py-1">Perfil del equipo de auditoria_________</h5>
+                            <h5 class="pl-4 py-1">Perfil del equipo de auditoria</h5>
                           </div>
                       </div>
 
                       <div role="tab" class="border tab" style="cursor: pointer;" onclick="LaFuncionMagica('Roles.php')">
                           <div style="border-left: solid white 5px; height: 100%;" class="itemL">
-                            <h5 class="pl-4 py-1">Asignación de Roles_________</h5>
+                            <h5 class="pl-4 py-1">Asignación de Roles</h5>
                           </div>
                       </div>
 
                       <div role="tab" class="border tab" style="cursor: pointer;" onclick="LaFuncionMagica('PlanProyecto.php')">
                           <div style="border-left: solid white 5px; height: 100%;" class="itemL">
-                            <h5 class="pl-4 py-1">Plan de Proyectos_________</h5>
+                            <h5 class="pl-4 py-1">Plan de Proyectos</h5>
                           </div>
                       </div>
 
                       <div role="tab" class="border tab" style="cursor: pointer;" onclick="LaFuncionMagica('PlanEntregable.php')">
                           <div style="border-left: solid white 5px; height: 100%;" class="itemL">
-                            <h5 class="pl-4 py-1">Plan de Entregables_________</h5>
+                            <h5 class="pl-4 py-1">Plan de Entregables</h5>
                           </div>
                       </div>
 
@@ -259,6 +329,70 @@
                   </div>
                   <!-- Accordion card -->
 
+                  <!-- Accordion card -->
+                  <div class="card">
+
+                    <!-- Card header -->
+                    <div class="card-header border  asideL" role="tab" id="headingOne6">
+                      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne6" aria-expanded="false"
+                        aria-controls="collapseOne6" class=" white-text " style="">
+                        <h5 class="mb-0 font-weight-bold ">
+                          VI. Pruebas Realizadas<i class="fas fa-angle-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+
+                    <!-- Card body -->
+                    <div id="collapseOne6" class="collapse " role="tabpanel" aria-labelledby="headingOne6" data-parent="#accordionEx">
+                      <div role="tab" class="border tab" style="cursor: pointer;" onclick="LaFuncionMagica('PruebasCumplimientoR.php')">
+                          <div style="border-left: solid white 5px; height: 100%;" class="itemL">
+                            <h5 class="pl-4 py-1">Pruebas de Cumplimiento</h5>
+                          </div>
+                      </div>
+
+                      <div role="tab" class="border tab" style="cursor: pointer;" onclick="LaFuncionMagica('PruebasSustantivasR.php')">
+                          <div style="border-left: solid white 5px; height: 100%;" class="itemL">
+                            <h5 class="pl-4 py-1">Pruebas Sustantivas</h5>
+                          </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <!-- Accordion card -->
+
+                    <!-- Accordion card -->
+                  <div class="card">
+
+                    <!-- Card header -->
+                    <div class="card-header border  asideL" role="tab" id="headingOne7">
+                      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne7" aria-expanded="false"
+                        aria-controls="collapseOne7" class=" white-text " style="">
+                        <h5 class="mb-0 font-weight-bold ">
+                          VII. Generar Reporte<i class="fas fa-angle-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+
+                    <!-- Card body -->
+                    <div id="collapseOne7" class="collapse " role="tabpanel" aria-labelledby="headingOne7" data-parent="#accordionEx">
+                      <div role="tab" class="border tab" style="cursor: pointer;" >
+                          <div style="border-left: solid white 5px; height: 100%;" class="itemL">
+                            <a class="pl-4 py-1" href="../phpword/Templatee.php"> Datos de la auditoria</a>
+                          </div>
+                      </div>
+
+                      <div role="tab" class="border tab" style="cursor: pointer;" onclick="LaFuncionMagica('PruebasSustantivasR.php')">
+                          <div style="border-left: solid white 5px; height: 100%;" class="itemL">
+                            <h5 class="pl-4 py-1"></h5>
+                          </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <!-- Accordion card -->
+
                 </div>
                 <!-- Accordion wrapper -->
             </div>
@@ -286,6 +420,10 @@
 
 
 <script>
+// Data Picker Initialization
+
+
+
                 var consulta="";
                var consultajax = $.ajax({});
                var error = true;
@@ -314,6 +452,33 @@
               success: function(data){
               $("#contenedor").empty();
               $("#contenedor").append(data);
+              }
+        });
+      }
+
+        function MostrarContenidoPrueba(){
+        if(consultajax && consultajax.readyState != 4) { 
+              error = false;
+              consultajax.abort();
+        }
+        error = true;    
+        opcion =document.getElementById('parametro').value;
+        consultajax = $.ajax({
+              type: "POST",
+              url: 'cargarPrueba.php',
+              data: "id_prueba="+opcion,
+              dataType: "html",
+              beforeSend: function(){
+               $("#cajaPreguntas").html("<br><br><div style='width: 3rem; height: 3rem;' class='spinner-grow text-success' role='status'><span class='sr-only'>Loading...</span></div>");
+               console.log("cargando");
+                          },
+              error: function(){
+                if(error)
+                  alert("error peticion ajax");
+              },
+              success: function(data){
+              $("#cajaPreguntas").empty();
+              $("#cajaPreguntas").append(data);
               }
         });
       }

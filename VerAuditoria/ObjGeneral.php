@@ -1,12 +1,3 @@
-<?php 
-  include("..//conexion2.php");
-  session_start();
-  $IdAuditoria = $_SESSION['id'];
-  /**/
-  $res = $conexion->query("select ObjGeneral as Obj from planificacion where IdAuditoria = $IdAuditoria");
-  $Obj = $res->fetchAll(PDO::FETCH_OBJ);
-  $Obj = $Obj[0];
- ?>
 <h1 class="text-center card-header">Objetivo General</h1>
 <br>
-<?php echo $Obj->Obj ?>
+Determinar mediante evidencias si se está ejecutando un correcto control y uso de las aplicaciones ofimáticas dentro del departamento de Bienestar estudiantil del Colegio de Alto Rendimiento de la Libertad (COAR) .

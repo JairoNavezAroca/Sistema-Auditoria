@@ -1,8 +1,9 @@
-	<option value="0" disabled selected>Seleccione Activo</option>
+	<option value="" disabled selected>Seleccione Activo</option>
 	<?php 
 		include("..//..//conexion.php");
   		session_start();
 		$IdAuditoria = $_SESSION['id'];
+		echo "select * from Activos where IdAuditoria = $IdAuditoria";
 		$res = $conexion -> query("select * from Activos where IdAuditoria = $IdAuditoria");
 		while($row = mysqli_fetch_row($res)){
 			$id = $row[0];

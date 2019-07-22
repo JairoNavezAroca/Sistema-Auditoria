@@ -1,11 +1,4 @@
-<?php 
-    include("..//conexion2.php");
-    $id = $_SESSION['id'];
-    $sql = "select * from planificacion where IdAuditoria = $id order by IdPlanificacion desc";
-    $res = $conexion -> query($sql);
-    $Plan = $res->fetchAll(PDO::FETCH_OBJ);
-    $Plan = $Plan[0];
- ?>
+
 
 <!--Carousel Wrapper-->
 <div id="plan" class="carousel slide carousel-fade" data-ride="carousel" >
@@ -22,7 +15,7 @@
                 <div class="col-md-12">
                    <div class="form-group">
                     <label for="General">Objetivo General</label>
-                    <textarea class="form-control" id="General" rows="2" id="Plan_OGeneral" name="Plan_OGeneral" form="formularioPlan"><?php echo $Plan->ObjGeneral ?></textarea>
+                    <textarea class="form-control" id="General" rows="2" id="Plan_OGeneral" name="Plan_OGeneral" form="formularioPlan"></textarea>
                   </div>
                </div>
              </div>
@@ -31,7 +24,7 @@
                <div class="col-md-12">
                    <div class="form-group">
                     <label for="Específicos">Objetivos Específicos</label>
-                    <textarea class="form-control" id="Específicos" rows="2" id="Plan_Oespecifico" name="Plan_Oespecifico" form="formularioPlan"><?php echo $Plan->ObjEspecifico ?></textarea>
+                    <textarea class="form-control" id="Específicos" rows="2" id="Plan_Oespecifico" name="Plan_Oespecifico" form="formularioPlan"></textarea>
                   </div>
                </div>
              </div>
@@ -40,7 +33,7 @@
                <div class="col-md-12">
                    <div class="form-group">
                     <label for="Alcance">Alcance</label>
-                    <textarea class="form-control" id="Alcance" rows="2" id="Plan_Alcance" name="Plan_Alcance" form="formularioPlan"><?php echo $Plan->Alcance ?></textarea>
+                    <textarea class="form-control" id="Alcance" rows="2" id="Plan_Alcance" name="Plan_Alcance" form="formularioPlan"></textarea>
                   </div>
                </div>
              </div>
@@ -52,7 +45,7 @@
                <div class="col-md-12">
                    <div class="form-group">
                     <label for="Realizará">¿Qué se Realizará?</label>
-                    <textarea class="form-control" id="Realizará" rows="2" id="Plan_Realizar" name="Plan_Realizar" form="formularioPlan"><?php echo $Plan->Realizar ?></textarea>
+                    <textarea class="form-control" id="Realizará" rows="2" id="Plan_Realizar" name="Plan_Realizar" form="formularioPlan"></textarea>
                   </div>
                </div>
              </div>
@@ -61,7 +54,7 @@
                <div class="col-md-12">
                    <div class="form-group">
                     <label for="NRealizará">¿Qué no se Realizará?</label>
-                    <textarea class="form-control" id="NRealizará" rows="2" id="Plan_NoRealizar" name="Plan_NoRealizar" form="formularioPlan"><?php echo $Plan->NoRealizar ?></textarea>
+                    <textarea class="form-control" id="NRealizará" rows="2" id="Plan_NoRealizar" name="Plan_NoRealizar" form="formularioPlan"></textarea>
                   </div>
                </div>
              </div>
@@ -70,7 +63,7 @@
                <div class="col-md-12">
                    <div class="form-group">
                     <label for="Limitaciones">Limitaciones</label>
-                    <textarea class="form-control" id="Limitaciones" rows="2" id="Plan_Limitaciones" name="Plan_Limitaciones" form="formularioPlan"><?php echo $Plan->Limitaciones ?></textarea>
+                    <textarea class="form-control" id="Limitaciones" rows="2" id="Plan_Limitaciones" name="Plan_Limitaciones" form="formularioPlan"></textarea>
                   </div>
                </div>
              </div>

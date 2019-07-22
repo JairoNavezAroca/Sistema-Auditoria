@@ -11,6 +11,5 @@
 
 	$sql = 'insert into Activos(IdAuditoria, Nombre, Descripcion, Importancia) values';
 	$sql = "$sql ($id, '$Activo_Nombre', '$Activo_Descripcion', '$Activo_Importancia')";
-	echo $sql;
 	$conexion->query($sql);
  ?>

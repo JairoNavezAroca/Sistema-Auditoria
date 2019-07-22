@@ -1,11 +1,3 @@
-<?php 
-  include("..//conexion2.php");
-  session_start();
-  $IdAuditoria = $_SESSION['id'];
-  /**/
-  $res = $conexion->query("select ac.Nombre as Activo, r.Amenazas as Amenaza, r.Impacto as Impacto from auditoria a join activos ac on a.IdAuditoria = ac.IdAuditoria join Riesgos r on r.IdActivo = ac.IdActivo where a.IdAuditoria = $IdAuditoria");
-  $Riesgos = $res->fetchAll(PDO::FETCH_OBJ);
- ?>
 <h1 class="text-center card-header">Identificación de Riesgos</h1>
 <br>
 <div class="container">
@@ -15,18 +7,17 @@
 				<div class="col-md-4"><h3 class="font-weight-bold">Impacto</h3></div>
 			</div>
 
-			<?php 
-      			foreach($Riesgos as $R){
-      			?>
-      			<div class="row ">
-					<div class="col-md-4"><h5><?php echo $R->Activo ?></h5></div>
-					<div class="col-md-4"><h5><?php echo $R->Amenaza ?></h5></div>
-					<div class="col-md-4"><h5><?php echo $R->Impacto ?></h5></div>
-				</div>
-				<hr>
-      			<?php 
-      			}
-			 ?>
 
+			<div class="row ">
+				<div class="col-md-4"><h5>Computadoras HP – Intel Corei3 – 4 gb RAM</h5></div>
+				<div class="col-md-4"><h5 >Computadoras usadas para la gestión de información del jefe de departamento.</h5></div>
+				<div class="col-md-4"><h5 >Computadoras usadas para la gestión de información del jefe de departamento.</h5></div>
+			</div>
+			<hr>
+			<div class="row ">
+				<div class="col-md-4"><h5>Microsoft Office 2016 Professional</h5></div>
+				<div class="col-md-4"><h5 >Paquete de aplicaciones ofimáticas para la gestión de información.</h5></div>
+				<div class="col-md-4"><h5 >Paquete de aplicaciones ofimáticas para la gestión de información.</h5></div>
+			</div>
 
 </div>

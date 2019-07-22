@@ -52,7 +52,13 @@
     </div>
 
     <div class="col-md-4 mt-4">
-      <a class="btn btn-info btn-block animated fadeInRight" data-toggle="modal" data-target="#cumplimiento"><i class="fas fa-id-card  mb-2 fa-3x"></i><div>Pruebas de Cumplimiento</div></a>
+      <a class="btn btn-info btn-block animated fadeInRight" target="_blank" href="../ModeladorCumplimiento/main.php?id=<?php echo $id?>"><i class="fas fa-id-card  mb-2 fa-3x"></i><div>Pruebas de Cumplimiento</div></a>
+    </div>
+  </div>
+
+  <div class="row justify-content-around mb-5">
+    <div class="col-md-4 ">
+      <a class="btn btn-success btn-block animated fadeInRight" target="_blank" href="../ModeladorSustantiva/main.php?id=<?php echo $id?>"><i class="fas fa-pencil-alt  mb-2 fa-3x"></i><div>Pruebas Sustantivas</div></a>
     </div>
   </div>
 </div>

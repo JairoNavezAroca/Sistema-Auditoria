@@ -14,5 +14,4 @@
 	$sql = 'insert into Riesgos(IdAuditoria, IdActivo, Amenazas, Impacto, Probabilidad) values';
 	$sql = "$sql ($id, $Riesgos_Activo, '$Riesgos_Amenaza', '$Riesgos_Impacto', '$Riesgos_Probabilidad')";
 	$conexion->query($sql);
-	echo $sql;
  ?>
