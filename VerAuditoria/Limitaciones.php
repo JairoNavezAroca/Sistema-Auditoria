@@ -14,6 +14,7 @@
 <h3 class="mt-2 ml-3">Entre los distintos factores que limitan el desarrollo de nuestro proyecto podemos mencionar:</h3>
 	<ol>
 		<?php 
+			$Obj->Limitaciones = trim($Obj->Limitaciones);
 			$vector = explode(chr(13),$Obj->Limitaciones);
 			foreach ($vector as $v) {
 				echo '<li>'.$v.'</li>';

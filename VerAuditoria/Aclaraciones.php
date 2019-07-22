@@ -13,6 +13,7 @@
 <h3 class="mt-2 ml-3">¿Que se realizará en nuestro trabajo de auditoria?</h3>
 	<ul>
 		<?php 
+			$Obj->Realizar = trim($Obj->Realizar);
 			$vector = explode(chr(13),$Obj->Realizar);
 			foreach ($vector as $v) {
 				echo "<li>$v</li>";
@@ -25,6 +26,7 @@
 <h3 class="mt-2 ml-3">¿Qué no se realizará en nuestro trabajo de auditoria?</h3>
 	<ul>
 		<?php 
+			$Obj->NoRealizar = trim($Obj->NoRealizar);
 			$vector = explode(chr(13),$Obj->NoRealizar);
 			foreach ($vector as $v) {
 				echo "<li>$v</li>";

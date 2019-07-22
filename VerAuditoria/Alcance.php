@@ -15,6 +15,7 @@
 		</div>
 		<?php 
 			//$vector = str_replace('\r\n', '.', $Obj->Alcance);
+			$Obj->Alcance = trim($Obj->Alcance);
 			$vector = explode(chr(13),$Obj->Alcance);
 			//$vector = explode('. ',$vector);
 			foreach ($vector as $v) {
