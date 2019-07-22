@@ -145,8 +145,8 @@ CREATE TABLE MarcoInternacional
 CREATE TABLE MarcoNacional
 (
 	IdNacional           int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	Codigo               varchar(20) NULL,
-	Detalle              varchar(100) NULL
+	Codigo               text NULL,
+	Detalle              text NULL
 );
 
 
@@ -268,7 +268,7 @@ CREATE TABLE PruebaSustantiva
 	IdPrueba 		int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	IdAuditor 		int NOT NULL,
 	IdPregunta 		int NOT NULL,
-	Nombre 			varchar(10),
+	Nombre 			varchar(100),
 	Resultado		boolean,
 	FOREIGN KEY (IdAuditor) REFERENCES Auditor(IdAuditor),
 	FOREIGN KEY (IdPregunta) REFERENCES DetallePruebaCumplimiento(IdDetalle)
@@ -533,20 +533,6 @@ INSERT INTO `detalleobjetos` (`IdDetalle`, `IdObjeto`, `IdAuditoria`) VALUES
 
 
 
-
-INSERT INTO `detalleinternacional` (`IdDetalle`, `IdAuditoria`, `IdInternacional`) VALUES
-(4, 1, 2),
-(5, 1, 3),
-(6, 1, 4);
-
-INSERT INTO `detallenacional` (`IdDetalle`, `IdAuditoria`, `IdNacional`) VALUES
-(6, 1, 1),
-(7, 1, 2),
-(8, 1, 3),
-(9, 1, 4),
-(10, 1, 5);
-
-
 INSERT INTO `detalleauditores` (`IdDetalle`, `IdAuditor`, `IdAuditoria`, `IdRol`) VALUES
 (1, 1, 1, 10),
 (2, 2, 1, 7),
@@ -576,3 +562,27 @@ INSERT INTO `detallearchivos` (`IdAuditoria`, `IdDetalle`, `Nombre`, `Ruta`) VAL
 (1, 5, 'Informe de evaluación del Inventario del equipo físico.', NULL),
 (1, 6, 'Informe Corto de Auditoria (Borrador).', NULL),
 (1, 7, 'Informe Detallado de Auditoria.', NULL);
+
+
+
+
+
+INSERT INTO `pruebacumplimiento` (`IdPrueba`, `IdAuditoria`, `FechaRegistro`, `Nombre`, `Normas`) VALUES
+(1, 1, '2019-07-22 18:17:57', 'Documentación de inventarios', 'DECRETO SUPREMO Nº 013-2003-PCM,Resolución Nª 039-98/SBN,Resolución Nª 158-97'),
+(2, 1, '2019-07-22 18:20:20', 'Documentación de Licencia de Software', 'IEEE 1062:1998,DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,DECRETO SUPREMO Nº 013-2003-PCM');
+
+INSERT INTO `detallepruebacumplimiento` (`IdDetalle`, `IdPrueba`, `Pregunta`, `Norma`, `Respuesta`) VALUES
+(1, 1, '¿Considera importante el establecimiento de políticas y estándares para la adquisición uso y control de recursos de hardware y aplicaciones en la institución?', 'DECRETO SUPREMO Nº 013-2003-PCM,', 1),
+(2, 1, 'Con respecto a la pregunta anterior ¿La institución cuenta con esas políticas y estándares?', ',DECRETO SUPREMO Nº 013-2003-PCM,Resolución Nª 039-98/SBN,', 1),
+(3, 1, ' ¿La institución cuenta con un plan de compras o adquisiciones de recursos informáticos?', ',Resolución Nª 158-97,', 1),
+(4, 1, 'Explique cómo se lleva a cabo el proceso de compra de recursos informáticos para la institución', ',DECRETO SUPREMO Nº 013-2003-PCM,Resolución Nª 039-98/SBN,Resolución Nª 158-97,', 1),
+(5, 1, 'La institución cuenta con mecanismos que garanticen el inventario de las adquisiciones de equipos', ',DECRETO SUPREMO Nº 013-2003-PCM,Resolución Nª 158-97,', 1),
+(6, 1, '¿Cómo se realiza el proceso de actualización del inventario ofimático en la institución? descríbalo.', ',Resolución Nª 039-98/SBN,', 1),
+(7, 1, '¿Participan activamente los usuarios en el proceso de actualización del inventario ofimático de la institución?', ',DECRETO SUPREMO Nº 013-2003-PCM,Resolución Nª 039-98/SBN,Resolución Nª 158-97,', 1),
+(8, 1, '¿Se evalúan periódicamente los cambios de ubicación de los recursos informáticos de la institución?', ',DECRETO SUPREMO Nº 013-2003-PCM,Resolución Nª 039-98/SBN,', 1),
+(9, 2, '¿El software fue adquirido con algún representante de la firma a la que pertenece?', 'DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,', 1),
+(10, 2, '¿La persona encargada de la instalación del software cuenta con la lista de licencias deseadas al equipo y departamento que corresponde? ', ',IEEE 1062:1998,DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,', 1),
+(11, 2, '¿El software que se utiliza para la cuestión operativa de la institución se actualiza o se hace cambio de versión cada cierto periodo de tiempo?', ',DECRETO SUPREMO Nº 013-2003-PCM,', 1),
+(12, 2, '¿Se cuenta con alguna guía para saber el control de dichas licencias y en cómo se clasifica dentro de la empresa? ', ',DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,DECRETO SUPREMO Nº 013-2003-PCM,', 1),
+(13, 2, '¿Existe algún procedimiento de control para la adquisición y registro de licencias de software?', ',DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,DECRETO SUPREMO Nº 013-2003-PCM,', 1),
+(14, 2, '¿Se monitorea y/o supervisa el procedimiento mencionado en la pregunta anterior? ', ',DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,DECRETO SUPREMO Nº 013-2003-PCM,', 1);
