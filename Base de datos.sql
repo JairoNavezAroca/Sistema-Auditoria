@@ -1,5 +1,7 @@
 drop database if exists SistemaAuditoria;
+
 create database SistemaAuditoria;
+
 use SistemaAuditoria;
 
 /*
