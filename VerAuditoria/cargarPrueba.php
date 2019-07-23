@@ -6,6 +6,8 @@
 			
 			var conteoGeneral=[];
 			var conteoIndividual=[];
+
+			var respuestasMarcadas=[];
 		</script>
 
 <?php 
@@ -154,6 +156,7 @@
 			             <script type="text/javascript">
 			             	idpreguntas.push(<?php echo $row[0] ?>);
 			             	respuestas.push(<?php echo $row[4] ?>);
+			             	respuestasMarcadas.push(0);
 			             </script>
 				 			<?php $cont++;
 				 	}
@@ -194,6 +197,7 @@
  	}
 
  	var porcentajeG=0;
+
  	function evaluar(){
  		reinicia();
  		//console.log(normasGenerales);
@@ -215,8 +219,8 @@
  				b.checked = false;
  			}
  			if (respuestas[i] == 1)
- 				if (a.checked == true)
- 				{
+ 			{	if (a.checked == true)
+ 				{	respuestasMarcadas[i]=1;
  					puntaje	+= 1;
  					for (var j = 0; j < totales[i].length; j++)
  						{
@@ -225,9 +229,12 @@
  										conteoIndividual[posNorma]+=1;
  						}
  				}
+ 			}
  			if (respuestas[i] == 0)
+ 			{
+
  				if (b.checked == true)
- 				{
+ 				{	respuestasMarcadas[i]=0;
  					puntaje	+= 1;
  					for (var j = 0; j < totales[i].length; j++)
  						{
@@ -236,6 +243,7 @@
  										conteoIndividual[posNorma]+=1;
  						}
  				}
+ 			}
  			var PORCENTAJE = document.getElementById("PORCENTAJE");
  			porcentajeG=100*puntaje/tamaño;
  			PORCENTAJE.innerHTML = "Grado general de Cumplimiento: " + String(100*puntaje/tamaño) + "%";
@@ -280,7 +288,7 @@
         consultajax = $.ajax({
               type: "POST",
               url: "GuardarPruebaSustantiva.php",
-              data: "CG="+conteoGeneral+"&CI="+conteoIndividual+"&IdPrueba="+IdPrueba+"&Auditado="+Auditado+"&Fecha="+Fecha+"&Institucion="+Institucion+"&NG="+normasGenerales+"&PORC="+porcentajeG+"",
+              data: "CG="+conteoGeneral+"&CI="+conteoIndividual+"&IdPrueba="+IdPrueba+"&Auditado="+Auditado+"&Fecha="+Fecha+"&Institucion="+Institucion+"&NG="+normasGenerales+"&PORC="+porcentajeG+"&Respuestas="+respuestasMarcadas+"",
               dataType: "html",
               beforeSend: function(){
                $("#ContenedorRespuesta").html("<br><br><div style='width: 3rem; height: 3rem;' class='spinner-grow text-success' role='status'><span class='sr-only'>Loading...</span></div>");
