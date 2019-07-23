@@ -164,6 +164,9 @@
 						<input type="" name="preguntaF" id="preguntaF" value="" class="d-none">
 						<input type="" name="respuestaF" id="respuestaF" value="" class="d-none">
 						<input type="" name="normaP" id="normaP" value="" class="d-none">
+						<input type="" name="IDPREGUNTA" id="IDPREGUNTA" value="" class="d-none">
+						<input type="" name="IDAUDITORRR" id="IDAUDITORRR" value="" class="d-none">
+						<input type="" name="LISTADODEPREGUNTAS" id="LISTADODEPREGUNTAS" value="" class="d-none">
 						<button type="submit" form="formulario" class="d-none" id="save"></button>
 					</form>
 				           
@@ -175,6 +178,18 @@
 
 
 <script>
+
+	var tituloPrueba;
+	var normas=[];
+
+	var cuestion=[];
+	var normaCuestion=[];
+	var respuesta=[];
+
+
+	var listadodepreguntas = '';
+
+
 	 var consulta="";
      var consultajax = $.ajax({});
      var error = true;
@@ -258,6 +273,7 @@ var cont=1;
 		var Pregunta=document.getElementById("P1").value;
 		if (Pregunta.length<1) {alert("Campos de Prueba no llenados");}
 		else{
+			listadodepreguntas = listadodepreguntas + Pregunta + ',';
 		var t1='<div class="row" id="#'+String(cont)+'">';
 		var t1=t1.concat('<div class="col-md-5"><h8>')+String(cont)+'. '+Pregunta+'</h8></div>';
 
@@ -279,5 +295,25 @@ var cont=1;
 
 	}
 
-	
+	function enviar(){
+
+      	var respuestas=[];
+
+      	document.getElementById("titleF").value=tituloPrueba;
+      	document.getElementById("normasF").value=normas;
+      	document.getElementById("preguntaF").value=cuestion;
+      	document.getElementById("normaP").value=normaCuestion;
+      	document.getElementById("respuestaF").value=respuesta;
+      	document.getElementById("IDPREGUNTA").value=document.getElementById("contenedorPreguntas").value;
+      	document.getElementById("IDAUDITORRR").value=document.getElementById("IdAuditor").value;
+      	document.getElementById("LISTADODEPREGUNTAS").value=listadodepreguntas;
+      	document.getElementById("save").click();
+
+
+      	for (var i = 1; i <= cont; i++) {
+      		
+      	}
+
+
+      }
 </script>

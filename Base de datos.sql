@@ -586,3 +586,24 @@ INSERT INTO `detallepruebacumplimiento` (`IdDetalle`, `IdPrueba`, `Pregunta`, `N
 (12, 2, '¿Se cuenta con alguna guía para saber el control de dichas licencias y en cómo se clasifica dentro de la empresa? ', ',DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,DECRETO SUPREMO Nº 013-2003-PCM,', 1),
 (13, 2, '¿Existe algún procedimiento de control para la adquisición y registro de licencias de software?', ',DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,DECRETO SUPREMO Nº 013-2003-PCM,', 1),
 (14, 2, '¿Se monitorea y/o supervisa el procedimiento mencionado en la pregunta anterior? ', ',DECRETO SUPREMO Nº 026-2016-PCM/La ley Nº 27269,DECRETO SUPREMO Nº 013-2003-PCM,', 1);
+
+
+INSERT INTO `pruebasustantiva` (`IdPrueba`, `IdAuditor`, `IdPregunta`, `Nombre`, `Resultado`) VALUES
+(1, 3, 3, 'Documentación de Licencia de Software 1 ', NULL),
+(2, 2, 12, 'Documentación de Licencia de Software 2', NULL),
+(3, 4, 9, 'Documentación de Licencia de Software 3', NULL),
+(4, 1, 3, 'Documentación de Licencia de Software 4', NULL);
+
+INSERT INTO `detallepruebasustantiva` (`IdDetalle`, `IdPrueba`, `Descripcion`, `Resultado`) VALUES
+(1, 1, 'Verificar que exista un comité para la realización de inventario físico y de software', NULL),
+(2, 1, 'Identificar los miembros que lo integran', NULL),
+(3, 1, 'Verificar que exista un inventario de las adquisiciones físicas y de software', NULL),
+(4, 1, 'Verificar que los inventarios sean actualizados con cada adquisición y de software', NULL),
+(5, 2, 'Verificar la exitencia de la(s) guía(s)', NULL),
+(6, 3, 'Verificar si existe un contrato por la compra del sofware', NULL),
+(7, 3, 'Verificar si la fecha de contrato del sofware esta vigente', NULL),
+(8, 3, 'Verificar si el sofware instalado en las computadoras es el mismo sofware contratado', NULL),
+(9, 4, 'Verificar si existe un comité encargado de planear las compras o adquisiciones de recursos informati', NULL),
+(10, 4, 'dentificar los mienbros que lo integran', NULL),
+(11, 4, 'Verificar si hay programado un plan de posibles compras o adquisiciones de recursos informáticos', NULL);
+

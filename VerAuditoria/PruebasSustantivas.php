@@ -13,7 +13,8 @@
  	session_start();
  	$id = $_SESSION['id'];	
 
- 	$sql = "SELECT * from pruebasustantiva ps join detallepruebacumplimiento dpc on ps.IdPregunta = dpc.IdDetalle join pruebacumplimiento pc on pc.IdPrueba = dpc.IdPrueba where pc.IdAuditoria = $id order by dpc.IdPrueba desc";
+ 	$sql = "SELECT * from pruebasustantiva ps join detallepruebacumplimiento dpc on ps.IdPregunta = dpc.IdDetalle join pruebacumplimiento pc on pc.IdPrueba = dpc.IdPrueba where pc.IdAuditoria = $id order by ps.IdPrueba desc";
+	//echo $sql;
 	$sql=$conexion->query($sql);
 	/*
 SELECT * from pruebasustantiva ps join detallepruebacumplimiento dpc on ps.IdPregunta = dpc.IdDetalle join pruebacumplimiento pc on pc.IdPrueba = dpc.IdPrueba where pc.IdAuditoria = 1

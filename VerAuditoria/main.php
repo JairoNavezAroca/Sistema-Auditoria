@@ -26,8 +26,9 @@
 <?php include("navbar.php"); ?>
 <?php include("Contenido.php"); ?>
 <?php include ("PruebasCumplimiento/DocInv.php"); ?>
-<?php include ("PruebasCumplimiento/DocLic.php"); ?>
+<?php //include ("PruebasCumplimiento/DocLic.php"); ?>
 <?php include ("PruebasSustantivas/DocLic.php"); ?>
+<?php //include ("PruebasSustantivas/DocLic.php"); ?>
 
 
    <!-- SCRIPTS -->
