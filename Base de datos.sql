@@ -249,19 +249,12 @@ CREATE TABLE PruebaCumplimientoRealizada
 	FechaEjecucion	datetime,
 	institucion 	text,
 	IdPrueba 		int,
+	ConteoGeneral	text,
+	ConteoIndividual text,
 	FOREIGN KEY (IdPrueba) REFERENCES PruebaCumplimiento(IdPrueba)
 );
 
-CREATE TABLE DetallePruebaCumplimientoRealizada
-(
-	IdDetallePR 	int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	IdPruebaRealizada int NOT NULL,
-	IdPregunta		int,
-	Respuesta		boolean,
-	Observacion 	text,
-	FOREIGN KEY (IdPruebaRealizada) REFERENCES PruebaCumplimientoRealizada(IdPruebaRealizada),
-	FOREIGN KEY (IdPregunta) REFERENCES DetallePruebaCumplimiento(IdDetalle)
-);
+
 
 CREATE TABLE PruebaSustantiva
 (
