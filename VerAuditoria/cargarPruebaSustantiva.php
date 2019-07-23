@@ -65,11 +65,13 @@
 	<?php
 
 	 while($row=mysqli_fetch_array($sql)){
-	 	echo "<li>$row[2]</li>";
+	 	echo '<li>'.$row[2].'</li>';
+
 	 }
 	 ?>
-                  </ol>
+                  </ol> 
                 </div>
+
                 <div class=" col-md-4">
                   <?php 
 	 				$sql = "select * from DetallePruebaSustantiva dps join PruebaSustantiva ps on ps.IdPrueba = dps.IdPrueba join auditor a on a.IdAuditor = ps.IdAuditor where ps.IdPrueba = $IdPrueba";
@@ -83,6 +85,10 @@
 					 }
                   ?>
                 </div>
+            </div>
+
+            <div class="form-check">
+            	<input type="checkbox" class="form-check-input" id="1b" checked="" >
             </div>
 	 <?php 
  ?>
