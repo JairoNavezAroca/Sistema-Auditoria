@@ -15,7 +15,7 @@
 	                  Pregunta
 	                </div>
 	                <div class=" col-md-4 white-text">
-	                  Respuesta
+	                  Respuesta 
 	                </div>
 	            </div>
 	            <hr>
