@@ -11,8 +11,13 @@
 			$Institucion=$_POST["Institucion"];
 			$IdPrueba=$_POST["IdPrueba"];
 
+			$NormasG=$_POST["NG"];
+			$PorcG=$_POST["PORC"];
+
+			echo $NormasG." ".$PorcG;
+
 			include("..//conexion.php");
-			$sql = "INSERT INTO PruebaCumplimientoRealizada(Auditado,FechaEjecucion,institucion,IdPrueba,ConteoGeneral,ConteoIndividual) VALUES('".$Auditado."','".$Fecha."','".$Institucion."','".$IdPrueba."','".$ConteoGeneral."','".$ConteoIndividual."')";
+			$sql = "INSERT INTO PruebaCumplimientoRealizada(Auditado,FechaEjecucion,institucion,IdPrueba,ConteoGeneral,ConteoIndividual,Normas,PorcG) VALUES('".$Auditado."','".$Fecha."','".$Institucion."','".$IdPrueba."','".$ConteoGeneral."','".$ConteoIndividual."','".$NormasG."','".$PorcG."')";
 			if($conexion->query($sql))
 			{
 				?> <h5>Registro Exitoso!</h5> <?php
