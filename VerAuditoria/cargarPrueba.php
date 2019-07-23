@@ -2,6 +2,9 @@
 			var normasGenerales=[];
 			var totales =[];
 			var normasPregunta=[];
+			
+			var conteoGeneral=[];
+			var conteoIndividual=[];
 		</script>
 
 <?php 
@@ -42,6 +45,8 @@
 		                  				 <li><?php echo $value; ?></li>
 		                  				<script>
 		                  				 	normasGenerales.push("<?php echo $value ?>");
+		                  				 	conteoGeneral.push(0);
+		                  				 	conteoIndividual.push(0);
 		                  				</script>
 		                  			<?php
 		                  		}
@@ -133,6 +138,10 @@
 
              </div>
 
+             <div id="Contenedor">
+             	
+             </div>
+
 
 	 		<?php
 	 	}
@@ -141,12 +150,28 @@
 
 
  <script type="text/javascript">
+
+ 	function reinicia(){
+ 		for (var j = 0; j <conteoGeneral.length; j++){ 
+ 			conteoGeneral[j]=0;
+ 			conteoIndividual[j]=0;
+ 		}
+ 	}
+
  	function evaluar(){
- 		console.log(normasGenerales);
+ 		reinicia();
+ 		//console.log(normasGenerales);
  		var puntaje = 0;
  		var tamaño = idpreguntas.length;
  		for (var i = 0; i < tamaño; i++) {
- 			console.log(totales[i]);
+
+ 			for (var j = 0; j < totales[i].length; j++){
+ 				var posNorma=normasGenerales.indexOf(totales[i][j]);
+ 					if(posNorma>-1)
+ 							conteoGeneral[posNorma]+=1;
+ 			}
+
+ 			//console.log(totales[i][0]);
  			var a = document.getElementById("a"+String(idpreguntas[i]));
  			var b = document.getElementById("b"+String(idpreguntas[i]));
  			if (a.checked && b.checked == true){
@@ -155,18 +180,44 @@
  			}
  			if (respuestas[i] == 1)
  				if (a.checked == true)
+ 				{
  					puntaje	+= 1;
+ 					for (var j = 0; j < totales[i].length; j++)
+ 						{
+ 							var posNorma=normasGenerales.indexOf(totales[i][j]);
+ 									if(posNorma>-1)
+ 										conteoIndividual[posNorma]+=1;
+ 						}
+ 				}
  			if (respuestas[i] == 0)
  				if (b.checked == true)
+ 				{
  					puntaje	+= 1;
+ 					for (var j = 0; j < totales[i].length; j++)
+ 						{
+ 							var posNorma=normasGenerales.indexOf(totales[i][j]);
+ 									if(posNorma>-1)
+ 										conteoIndividual[posNorma]+=1;
+ 						}
+ 				}
  			var PORCENTAJE = document.getElementById("PORCENTAJE");
  			PORCENTAJE.innerHTML = "Porcentaje: " + String(100*puntaje/tamaño) + "%";
  			$("#PROGRESO")
  				.css("width", 100*puntaje/tamaño + "%")
       			.attr("aria-valuenow", 100*puntaje/tamaño)
       			.text(100*puntaje/tamaño + "%");
+
+
  		}
+
+ 		var Contenedor = document.getElementById("Contenedor");
+ 		Contenedor.innerHTML = "<div></div>";
  		
+ 		for (var j = 0; j < normasGenerales.length; j++){
+ 				var porc=100*(conteoIndividual[j]/conteoGeneral[j]);
+ 				Contenedor.innerHTML+="<div class='row'>"+normasGenerales[j]+"</div>"+"<div class='row'><div class='progress col-md-6'> <div id='"+normasGenerales[j]+"' class='progress-bar progress-bar-success progress-bar-striped active' role='progressbar' style='width:"+porc+"%' aria-valuenow='"+porc+"' aria-valuemin='0' aria-valuemax='100'></div> </div></div>"+"<div class='row'>"+porc+ "%"+"</div><br>";
+
+ 		}
  	}
 
 
