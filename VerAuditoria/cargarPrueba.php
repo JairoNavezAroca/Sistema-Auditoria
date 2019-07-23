@@ -193,6 +193,7 @@
  		}
  	}
 
+ 	var porcentajeG=0;
  	function evaluar(){
  		reinicia();
  		//console.log(normasGenerales);
@@ -236,6 +237,7 @@
  						}
  				}
  			var PORCENTAJE = document.getElementById("PORCENTAJE");
+ 			porcentajeG=100*puntaje/tamaño;
  			PORCENTAJE.innerHTML = "Grado general de Cumplimiento: " + String(100*puntaje/tamaño) + "%";
  			$("#PROGRESO")
  				.css("width", 100*puntaje/tamaño + "%")
@@ -278,7 +280,7 @@
         consultajax = $.ajax({
               type: "POST",
               url: "GuardarPruebaSustantiva.php",
-              data: "CG="+conteoGeneral+"&CI="+conteoIndividual+"&IdPrueba="+IdPrueba+"&Auditado="+Auditado+"&Fecha="+Fecha+"&Institucion="+Institucion+"",
+              data: "CG="+conteoGeneral+"&CI="+conteoIndividual+"&IdPrueba="+IdPrueba+"&Auditado="+Auditado+"&Fecha="+Fecha+"&Institucion="+Institucion+"&NG="+normasGenerales+"&PORC="+porcentajeG+"",
               dataType: "html",
               beforeSend: function(){
                $("#ContenedorRespuesta").html("<br><br><div style='width: 3rem; height: 3rem;' class='spinner-grow text-success' role='status'><span class='sr-only'>Loading...</span></div>");
