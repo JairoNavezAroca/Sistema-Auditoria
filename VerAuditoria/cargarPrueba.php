@@ -1,3 +1,4 @@
+
 <script type="text/javascript">
 			var normasGenerales=[];
 			var totales =[];
@@ -14,7 +15,7 @@
  	$sql = "SELECT Nombre,Normas FROM pruebaCumplimiento WHERE IdPrueba='".$IdPrueba."'";
 	$sql=$conexion->query($sql);
 
-
+	?>   <input type="text" name="IdPruebaW" id="IdPruebaW" class="d-none" value="<?php echo $IdPrueba; ?>">  <?php
 	 while($row=mysqli_fetch_array($sql))
 	 	{	$normas=$row[1];
 	 		?>
@@ -24,6 +25,35 @@
 				              <span aria-hidden="true">&times;</span>
 				            </button>
 				 </div>
+
+				 <div class="row">
+				 	<div class="text-left col-md-6 mt-2">
+
+						 	<label for="Auditado">Auditado</label>
+							<input type="text" class="form-control"  id="Auditado" name="Auditado"  required="">
+						
+				 	</div>
+
+				 	<div class="text-left col-md-4 mt-2">
+				 		  <label for="date">Fecha de ejecución</label>
+						  <input type="date" id="date" class="form-control datepicker" name="date" required="">
+						 
+						
+				 	</div>
+				 </div>
+
+				  <hr>
+				
+				<div class="row">
+				 	<div class="text-left col-md-12 mt-2">
+				 		
+						 	<label for="institucion">Institución</label>
+							<input type="text" class="form-control" id="institucion" name="institucion" required="">
+						
+				 	</div>
+				 </div>
+
+				 <hr>
 
 				<div class="row">
 		                <div class=" col-md-5">
@@ -130,7 +160,7 @@
              ?>
              <div class="row">
 	            <div class='col-md-4'></div>
-	            <div class='col-md-3'><span id='PORCENTAJE'>Porcentaje de cumplimiento: 0%</span></div>
+	            <div class='col-md-3'><span id='PORCENTAJE'>Grado general de cumplimiento: 0%</span></div>
 	            <div class='progress col-md-5'>
 				  <div id='PROGRESO' class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width: 0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 				</div>
@@ -138,10 +168,15 @@
 
              </div>
 
+             <hr>
+             <h6>Grado de cumplimiento por norma:</h6>
              <div id="Contenedor">
              	
              </div>
 
+             <div id="ContenedorRespuesta">
+             	
+             </div>
 
 	 		<?php
 	 	}
@@ -201,7 +236,7 @@
  						}
  				}
  			var PORCENTAJE = document.getElementById("PORCENTAJE");
- 			PORCENTAJE.innerHTML = "Porcentaje: " + String(100*puntaje/tamaño) + "%";
+ 			PORCENTAJE.innerHTML = "Grado general de Cumplimiento: " + String(100*puntaje/tamaño) + "%";
  			$("#PROGRESO")
  				.css("width", 100*puntaje/tamaño + "%")
       			.attr("aria-valuenow", 100*puntaje/tamaño)
@@ -219,6 +254,46 @@
 
  		}
  	}
+
+
+
+               var consulta="";
+               var consultajax = $.ajax({});
+               var error = true;
+               
+
+      function CargarDatosPrueba(){
+      	var Auditado=document.getElementById("Auditado").value
+      	var Fecha=document.getElementById("date").value
+      	var Institucion=document.getElementById("institucion").value
+      	var IdPrueba=document.getElementById("IdPruebaW").value
+
+      	console.log(Auditado+" "+Fecha+" "+institucion);
+        if(consultajax && consultajax.readyState != 4) { 
+              error = false;
+              consultajax.abort();
+        }
+        error = true;    
+        opcion = 1;
+        consultajax = $.ajax({
+              type: "POST",
+              url: "GuardarPruebaSustantiva.php",
+              data: "CG="+conteoGeneral+"&CI="+conteoIndividual+"&IdPrueba="+IdPrueba+"&Auditado="+Auditado+"&Fecha="+Fecha+"&Institucion="+Institucion+"",
+              dataType: "html",
+              beforeSend: function(){
+               $("#ContenedorRespuesta").html("<br><br><div style='width: 3rem; height: 3rem;' class='spinner-grow text-success' role='status'><span class='sr-only'>Loading...</span></div>");
+               console.log("cargando");
+                          },
+              error: function(){
+                if(error)
+                  alert("error peticion ajax");
+              },
+              success: function(data){
+              $("#ContenedorRespuesta").empty();
+              $("#ContenedorRespuesta").append(data);
+              }
+        });
+      }
 
 
  </script>
