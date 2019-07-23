@@ -15,6 +15,7 @@
 
         <input type="text" name="" id="parametro" class="d-none">
         <a id="MostrarPrueba" onclick="MostrarContenidoPrueba()"></a>
+        <a id="MostrarPruebaR" onclick="MostrarContenidoPruebaR()"></a>
 
 
         <div class="container" id="cajaPreguntas">
