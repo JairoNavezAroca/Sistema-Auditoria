@@ -423,13 +423,11 @@ INSERT INTO `auditor` (`IdAuditor`, `Apellidos`, `Nombres`, `Perfil`,`Celular`) 
 (3, 'Olivares Ruiz', 'Cintia', 'Conocimiento de normas y leyes para el licenciamiento de software;Conocimiento en reglamento y funciones de entidades públicas.;Proactivo.','942419208'),
 (4, 'Argomedo de la Cruz', 'Jhon', 'Conocimiento de funcionalidades de aplicaciones ofimáticas.;Conocimiento en elaboración de informes y cronogramas de trabajo.;Proactivo.;','942419208');
 
-
 insert into Rubro(Descripcion) values
 	('Educacion'),
 	('Informática'),
 	('Adminsitración'),
 	('Inmoviliaria');
-
 
 insert into ObjetoAuditable(Descripcion) values
 	('Software Ofimático'),
@@ -449,13 +447,8 @@ insert into Rol(Descripcion) values
 	('Especialista en Ofimática'),
 	('Especialista en uso herramientas computacionales');
 
-
-
-
-
 INSERT INTO `empresa` (`IdEmpresa`, `Nombre`, `Mision`, `Vision`, `Estrategias`, `Ubicacion`, `Organigrama`, `IdRubro`) VALUES
 (1, 'Colegio de Alto Rendimiento - La Libertad', 'Ser una institución educativa con estándares internacionales de acreditación que consoliden el modelo educativo propio de la red de Colegios de Alto Rendimiento, sirviendo de referente de calidad académica, organizacional y de gestión en la región, que contribuya a mejorar la educación pública como base del desarrollo nacional y mundial.', 'Somos una institución educativa pública acreditada, parte de la Red de Colegios de Alto Rendimiento, que sobre la base del Programa Diploma del Bachillerato Internacional, fortalece las competencias personales, académicas y socioemocionales de estudiantes de alto desempeño, con miras a forjar ciudadanos íntegros y líderes comprometidos con el desarrollo del país y del mundo.', 'Educar a los alumnos bajo una guía basada en los diversos estándares internacionales con la finalidad de formar alumnos con competencias académicas y socioemocionales, y profesionalmente preparados para el futuro del mañana.\r\nOfrecer un servicio responsable y oportuno.\r\nSer un equipo integrado, donde se desarrolle un trabajo eficiente entre los miembros de la institución.', 'La institución se encuentra a unos 15 minutos de viaje desde la ciudad de Virú, sus alrededores son poco poblados y está parcialmente aislado de las actividades de la ciudad. La ubicación de esta institución favorece a sus objetivos institucionales, ya que al funcionar como internado, es conveniente alejar a los estudiantes de posibles distracciones y peligros existentes en la ciudad.', '', 1);
-
 
 INSERT INTO Estrategias(IdEmpresa,estrategia) VALUES
 (1,'Educar a los alumnos bajo una guía basada en los diversos estándares internacionales con la finalidad de formar alumnos con competencias académicas y socioemocionales, y profesionalmente preparados para el futuro del mañana.'),
@@ -464,9 +457,7 @@ INSERT INTO Estrategias(IdEmpresa,estrategia) VALUES
 
 INSERT INTO Organigrama(IdEmpresa,link,descripcion) VALUES
 	(1,'','En la estructura departamental de la institución no existe un área específica que administre los sistemas de información y/o tecnologías de la información. Por tanto cada departamento es independiente en  administrar y dar soporte a sus aplicaciones ofimáticas, asimismo controlar los recursos de hardware que utilizan. 
-La inexistencia de un departamento de TI no favorece el cumplimiento de los objetivos institucionales.
-');
-
+La inexistencia de un departamento de TI no favorece el cumplimiento de los objetivos institucionales.');
 
 insert into Auditoria(IdEmpresa,IdAuditor,Titulo,Motivos) values (1,1,'Auditoria ofimática al departamento de Bienestar Estudiantil del Colegio de Alto Rendimiento de la Libertad','Geográficamente, el Colegio de Alto Rendimiento de La Libertad, se encuentra ubicado en el campamento San José, provincia de Virú, departamento de La Libertad
 Desde la fundación del colegio de alto rendimiento de la libertad en el campamento San José el año 2015  la gestión de inventario, las adquisiciones de aplicaciones ofimáticas y sus respectivas licencias no han llevado un correcto control dentro de la institución, por lo que dicha institución requiere una auditoría para verificar si los procesos actuales cumplen con los objetivos que se plantea el colegio.
@@ -474,18 +465,12 @@ Este colegio, cuenta con diversos departamentos: Bienestar y Desarrollo del Estu
 Las aplicaciones ofimáticas del área de Bienestar estudiantil manejan información de mucha importancia para la entidad educativa, pero dada la complejidad de insertar grandes cantidades de datos en dichas aplicaciones, estos son administrados de forma física (reportes, fichas y archivos) y digital (documentos administrados en hojas de cálculo), siendo el punto referencial de selección la importancia y frecuencia de utilización de los mismos.
 El ambiente en donde funciona el área de Bienestar estudiantil, así como sus diversas oficinas presentan ciertas limitaciones de espacio, y las computadoras utilizadas en dicho ambiente pueden no estar en un lugar adecuado. Asimismo, el proceso de trasladar información desde un área a otra se dificulta debido al mal manejo en el almacenamiento de información.');
 
-
-
-
 insert into MarcoInternacional(Codigo, Detalle) values
 	('APO13.02','Definir y gestionar un plan de tratamiento del riesgo de la seguridad de la información.'),
 	('EDM04.01','Examinar y evaluar continuamente la necesidad actual y futura de los recursos relacionados con TI, las opciones para la asignación de recursos (incluyendo estrategias de aprovisionamiento) y los principios de asignación y gestión para cumplir de manera óptima con las necesidades de la empresa.'),
 	('DSS04','Gestionar la continuidad'),
 	('IEEE 1062:1998','En este estándar se describe una práctica que puede ser utilizada para la adquisición de cualquier producto de software, para cualquier tipo de plataforma computacional, independiente de su tamaño y complejidad.'),
 	('Modelo CMMI-ACQ','El Modelo CMMI – ACQ está diseñado especialmente para las organizaciones que adquieren software y servicios correlacionados. Proporciona una orientación para gestionar los proyectos relacionados con la adquisición de productos y servicios.');
-
-
-
 
 insert into DetalleInternacional(IdAuditoria,IdInternacional) values
 	(1,2),
@@ -506,32 +491,21 @@ insert into DetalleNacional(IdAuditoria,IdNacional) values
 	(1,4),
 	(1,5);
 
-
 INSERT INTO `activos` (`IdActivo`, `Descripcion`, `Importancia`, `IdAuditoria`, `Nombre`) VALUES
 (1, 'Computadoras usadas para la gestión de información del jefe de departamento.', 'Computadoras usadas para la gestión de información del jefe de departamento.', 1, 'Computadoras HP – Intel Corei3 – 4 gb RAM'),
 (2, 'Computadoras usadas para el desarrollo de las actividades laborales del personal de las diferentes o', 'Computadoras usadas para el desarrollo de las actividades laborales del personal de las diferentes o', 1, 'Computadoras DELL – Intel Corei3 – 4 gb RAM'),
 (3, 'Paquete de aplicaciones ofimáticas para la gestión de información.', 'Paquete de aplicaciones ofimáticas para la gestión de información.', 1, 'Microsoft Office 2016 Professional');
 
---
--- Volcado de datos para la tabla `riesgos`
---
-
 INSERT INTO `riesgos` (`IdRiesgo`, `IdActivo`, `IdAuditoria`, `Amenazas`, `Impacto`, `Probabilidad`) VALUES
 (1, 1, 1, 'Virus informáticos descargados de internet.\r\nLa no centralización de la información.', 'Posible pérdida de información ya que los archivos donde se registran los datos pueden ser eliminado', 65),
 (2, 2, 1, 'Virus informáticos descargados de internet.\r\nLa no centralización de la información.', 'Posible pérdida de información ya que los archivos donde se registran los datos pueden ser eliminado', 70);
 
-
 INSERT INTO `planificacion` (`IdAuditoria`, `IdPlanificacion`, `ObjGeneral`, `ObjEspecifico`, `Alcance`, `Realizar`, `NoRealizar`, `Limitaciones`) VALUES
 (1, 1, 'Determinar mediante evidencias si se está ejecutando un correcto control y uso de las aplicaciones ofimáticas dentro del departamento de Bienestar estudiantil del Colegio de Alto Rendimiento de la Libertad (COAR) .', 'Comprobar el correcto control de inventario físico.\r\nComprobar el correcto control de inventario de licencias de software.\r\nVerificar la correcta asignación, tanto de las aplicaciones ofimáticas como del hardware, dependiendo del tipo de función que desarrollarán.\r\nVerificar que el ambiente donde se encuentra los recursos informáticos es el adecuado para su buena utilización y aprovechamiento de estos.', 'La presente auditoria solo evaluará los procesos y actividades dentro del departamento de Bienestar Estudiantil del Colegio de Alto Rendimiento de La Libertad.\r\nLas oficinas del departamento de Bienestar Estudiantil involucradas en la auditoria serán la Oficina de Servicio Social, la Oficina de Convivencia Estudiantil y la oficina de Coordinación Psicopedagógica.\r\nSe buscará verificar la correcta utilización de las aplicaciones ofimáticas, así como del hardware, tomando en cuenta la función que deben cumplir.\r\nSe evaluará la necesidad actual y futura de recursos relacionados con TI basándonos en la norma EDM04.01.\r\nSe evaluará el correcto proceso de adquisición de software basándonos en las normas IEEE 1062:1998 y la norma CMMI-ACQ.\r\nSe valuará la correcta adquisición de licencias de software, así como el correcto inventariado de las mismas, bajo las directrices del decreto supremo Nº 013-2003-PCM y Nº 026-2016-PCM/La ley Nª 27269.\r\nSe evaluará el correcto inventariado de equipos físicos bajo el reglamento de la Resolución Nª 039-98/SBN, reglamento Para el Inventario Nacional de Bienes Muebles del Estado.\r\nSe identificarán los equipos de hardware que pueden ser inventariados bajo las reglas de la Resolución Nª 158-97/SBN Catálogo Nacional de Bienes Muebles del Estado.\r\n', 'Solo se verificará el cumplimiento de instrumentos de gestión (MOF y ROF) con respecto al departamento de Bienestar Estudiantil, normas y políticas que incidan en el control de inventarios.\r\nSe verificará la existencia del Plan de Inventariado de equipos físicos.\r\nSe verificará la existencia del Plan de Inventariado de licencias de Software.\r\nSe verificará la existencia del Plan para adquisiciones de Software.\r\nSe verificará la existencia de un Plan para la asignación de aplicaciones ofimáticas.\r\n', 'No se realizará ninguna corrección de la ubicación actual de los equipos computacionales.\r\nNo se cambiará o desinstalará las aplicaciones ofimáticas existentes.\r\nNo se elaborará ningún plan de adquisiciones de software ni otro que no existiera.\r\n', 'Existencia de políticas de seguridad en la institución que limitan el libre tránsito del equipo auditor por las oficinas del departamento de Bienestar estudiantil.\r\nLa ubicación de la institución auditada se encuentra a 3 horas de viaje desde la locación del equipo auditor.');
-
-
-
 
 INSERT INTO `detalleobjetos` (`IdDetalle`, `IdObjeto`, `IdAuditoria`) VALUES
 (1, 1, 1),
 (2, 2, 1);
-
-
 
 INSERT INTO `detalleauditores` (`IdDetalle`, `IdAuditor`, `IdAuditoria`, `IdRol`) VALUES
 (1, 1, 1, 10),
@@ -562,8 +536,6 @@ INSERT INTO `detallearchivos` (`IdAuditoria`, `IdDetalle`, `Nombre`, `Ruta`) VAL
 (1, 5, 'Informe de evaluación del Inventario del equipo físico.', NULL),
 (1, 6, 'Informe Corto de Auditoria (Borrador).', NULL),
 (1, 7, 'Informe Detallado de Auditoria.', NULL);
-
-
 
 
 
