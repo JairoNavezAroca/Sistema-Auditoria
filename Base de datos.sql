@@ -251,6 +251,8 @@ CREATE TABLE PruebaCumplimientoRealizada
 	IdPrueba 		int,
 	ConteoGeneral	text,
 	ConteoIndividual text,
+	Normas 			text,
+	PorcG			decimal,
 	FOREIGN KEY (IdPrueba) REFERENCES PruebaCumplimiento(IdPrueba)
 );
 
