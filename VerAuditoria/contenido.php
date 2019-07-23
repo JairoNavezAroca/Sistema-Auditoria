@@ -415,6 +415,33 @@
         });
       }
 
+       function MostrarContenidoPruebaR(){
+        if(consultajax && consultajax.readyState != 4) { 
+              error = false;
+              consultajax.abort();
+        }
+        error = true;    
+        opcion =document.getElementById('parametro').value;
+        consultajax = $.ajax({
+              type: "POST",
+              url: 'cargarPruebaR.php',
+              data: "id_prueba="+opcion,
+              dataType: "html",
+              beforeSend: function(){
+               $("#cajaPreguntas").html("<br><br><div style='width: 3rem; height: 3rem;' class='spinner-grow text-success' role='status'><span class='sr-only'>Loading...</span></div>");
+               console.log("cargando");
+                          },
+              error: function(){
+                if(error)
+                  alert("error peticion ajax");
+              },
+              success: function(data){
+              $("#cajaPreguntas").empty();
+              $("#cajaPreguntas").append(data);
+              }
+        });
+      }
+
 
 
 
