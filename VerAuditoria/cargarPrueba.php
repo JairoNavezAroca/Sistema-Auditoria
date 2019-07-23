@@ -1,9 +1,16 @@
+<script type="text/javascript">
+			var normasGenerales=[];
+			var totales =[];
+			var normasPregunta=[];
+		</script>
+
 <?php 
 	$IdPrueba=$_POST['id_prueba'];
 	include("..//conexion.php");
 	
  	$sql = "SELECT Nombre,Normas FROM pruebaCumplimiento WHERE IdPrueba='".$IdPrueba."'";
 	$sql=$conexion->query($sql);
+
 
 	 while($row=mysqli_fetch_array($sql))
 	 	{	$normas=$row[1];
@@ -24,14 +31,22 @@
 		                  		<?php 
 
 		                  		$normas=explode(",", $normas);
+		                  		?>
+
+		                  			 
+		                  		<?php
+
 
 		                  		foreach ($normas as $key => $value) {
 		                  			?>
 		                  				 <li><?php echo $value; ?></li>
+		                  				<script>
+		                  				 	normasGenerales.push("<?php echo $value ?>");
+		                  				</script>
 		                  			<?php
 		                  		}
 
-		                  		 ?>
+		                  		 ?> 
 		                    </ul>
 		                </div>
             	</div>
@@ -61,12 +76,19 @@
 				 			echo "<br><br>Normas Relacionadas<br>";
 				 			$listanormas = split(',',$row[3]);
 				 			$cond = true;
+				 			?> <script>var aux=[]; normasPregunta=aux;</script> <?php
 				 			foreach ($listanormas as $item) {
 				 				if (strlen($item) > 0){
 				 					echo "<li>$item </li><br>";
 				 					$cond = false;
+
+				 					?>
+				 						<script>
+				 							normasPregunta.push("<?php echo $item; ?>");
+				 						</script>
+				 					<?php
 				 				}
-				 			}
+				 			} ?>  <script>totales.push(normasPregunta);</script> <?php
 				 			if ($cond)
 				 				echo "No se han registrado normas para esta pregunta";
 				 			?>
@@ -120,9 +142,11 @@
 
  <script type="text/javascript">
  	function evaluar(){
+ 		console.log(normasGenerales);
  		var puntaje = 0;
  		var tamaño = idpreguntas.length;
  		for (var i = 0; i < tamaño; i++) {
+ 			console.log(totales[i]);
  			var a = document.getElementById("a"+String(idpreguntas[i]));
  			var b = document.getElementById("b"+String(idpreguntas[i]));
  			if (a.checked && b.checked == true){
@@ -142,8 +166,7 @@
       			.attr("aria-valuenow", 100*puntaje/tamaño)
       			.text(100*puntaje/tamaño + "%");
  		}
- 		console.log(respuestas);
- 		console.log(idpreguntas);
+ 		
  	}
 
 
